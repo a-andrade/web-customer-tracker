@@ -14,21 +14,19 @@ import com.crm.springproject.entity.Customer;
 @RequestMapping("/customer")
 public class CustomerController {
 	
-	// need to inject customer DAO
+	// inject customer dao
 	@Autowired
 	private CustomerDAO customerDAO;
 	
 	@RequestMapping("/list")
-	public String listCustomers(Model model) {
-		// get customers from DAO
-		List<Customer> customers = customerDAO.getCustomers();
+	public String listCustomers(Model theModel) {
+		// get customers from dao
+		List<Customer> theCustomers = customerDAO.getCustomers();
 		
-		// add customers to model
-		model.addAttribute("customers", customers);
+		// add customers to the model
+		theModel.addAttribute("customers", theCustomers);
 		
 		return "list-customers";
 	}
-	
-	
-	
+
 }
