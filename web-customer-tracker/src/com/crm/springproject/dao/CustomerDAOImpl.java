@@ -2,20 +2,19 @@ package com.crm.springproject.dao;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
-import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.crm.springproject.entity.Customer;
 
 @Repository
 public class CustomerDAOImpl implements CustomerDAO {
 	
-	// need to inject the session factory
+	//need to inject session factory
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -25,13 +24,13 @@ public class CustomerDAOImpl implements CustomerDAO {
 		// get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		//create query
-		Query<Customer> query = currentSession.createQuery("from Customer", Customer.class);
+		// create query
+		Query<Customer> theQuery = currentSession.createQuery("from Customer", Customer.class);
 		
-		//execute query and get result list
-		List<Customer> customers = query.getResultList();
+		// execute query and get result list
+		List<Customer> customers = theQuery.getResultList();
 		
-		//return results
+		// return results
 		return customers;
 	}
 
