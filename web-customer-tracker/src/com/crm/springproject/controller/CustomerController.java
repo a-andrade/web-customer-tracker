@@ -5,23 +5,24 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.crm.springproject.dao.CustomerDAO;
 import com.crm.springproject.entity.Customer;
+import com.crm.springproject.service.CustomerService;
 
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
 	
-	// inject customer dao
+	// remove customer dao, inject customer service
 	@Autowired
-	private CustomerDAO customerDAO;
+	private CustomerService customerService;
 	
-	@RequestMapping("/list")
+	@GetMapping("/list")
 	public String listCustomers(Model theModel) {
-		// get customers from dao
-		List<Customer> theCustomers = customerDAO.getCustomers();
+		// remove customer dao call, get customers from service
+		List<Customer> theCustomers = customerService.getCustomers();
 		
 		// add customers to the model
 		theModel.addAttribute("customers", theCustomers);
